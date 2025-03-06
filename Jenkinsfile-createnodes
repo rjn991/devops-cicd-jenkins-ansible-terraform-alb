@@ -1,0 +1,30 @@
+pipeline {
+    agent any
+    stages{
+        stage("Pull SCM") {
+            steps {
+                git "https://github.com/rjn991/Devops-projects.git"    
+            }
+        }
+        stage("Terraform init") {
+             steps {
+                sh "terraform init"
+            }
+        }
+        stage("Terraform refresh") {
+             steps {
+                sh "TF_VAR_AK=$AK TF_VAR_SK=$SK terraform refresh"
+            }
+        }
+        stage("Terraform plan") {
+            steps {
+                sh "TF_VAR_AK=$AK TF_VAR_SK=$SK terraform plan"
+            }
+        }
+        stage("Terraform apply") {
+            steps {
+                sh "TF_VAR_AK=$AK TF_VAR_SK=$SK terraform apply --auto-approve"
+            }
+        }
+    }
+}
