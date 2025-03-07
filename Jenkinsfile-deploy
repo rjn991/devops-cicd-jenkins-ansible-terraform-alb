@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage("Pull SCM") {
             steps {
-                git branch:"master",url:"https://github.com/rjn991/Devops-projects.git"
+                git branch: 'main', url: 'https://github.com/rjn991/devops-cicd-jenkins-ansible-terraform-alb.git'
             }
         }
         stage("Prepare build") {
